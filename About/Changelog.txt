@@ -1,0 +1,4 @@
+# Changelog for PawnkindRaceDiversification
+
+1.3.1 - Updated to work with latest rimworld patch. Cleaned up the settings a bit.
+
