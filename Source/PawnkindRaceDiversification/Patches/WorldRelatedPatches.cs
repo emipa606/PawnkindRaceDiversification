@@ -32,12 +32,12 @@ public static class WorldRelatedPatches
             var num = 2;
             codes.InsertRange(i + num, new List<CodeInstruction>
             {
-                new CodeInstruction(OpCodes.Ldloc_S, 6),
+                new CodeInstruction(OpCodes.Ldloc_S, 7),
                 new CodeInstruction(OpCodes.Ldc_R4, 40f),
                 new CodeInstruction(OpCodes.Add),
-                new CodeInstruction(OpCodes.Stloc_S, 6),
-                new CodeInstruction(OpCodes.Ldloc_S, 6),
+                new CodeInstruction(OpCodes.Stloc_S, 7),
                 new CodeInstruction(OpCodes.Ldloc_S, 7),
+                new CodeInstruction(OpCodes.Ldloc_S, 8),
                 new CodeInstruction(OpCodes.Call, typeof(WorldRelatedPatches).GetMethod("DrawWorldWeightButton"))
             });
             break;

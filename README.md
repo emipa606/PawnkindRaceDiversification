@@ -13,9 +13,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2460358429
 	
 ![Image](https://i.imgur.com/Z4GOv8H.png)
 
-# Discontinued
 
-Due to losing interest in Rimworld, and because of the overwhelming nature of this mod, I've decided to cut development to it. If anyone is interested in picking this mod back up, feel free to do so.
 # Description
 
 Ever played with a bunch of race mods and think "Gee, I really wish I could see this race more often," or "I wish I could start a playthrough on a Rimworld without humans," or even "I really wish I could use race mods, but I don't want a whole bunch of bloat from factions and pawnkinds in my game."
@@ -76,7 +74,12 @@ Modders can patch the mod extensions that I created to allow their races to appe
 **Brrainz** for providing the **Harmony library**. Without it, this mod wouldn't have been possible.
 **Void's** source from **Character Editor** for helping me figure out how to patch the pawn generator.
 **Dubwise's** source from **Bad Hygiene** for helping me identify how to access loaded defs.
-**Erdelf** for providing **Human
+**Erdelf** for providing **Humanoid Alien Races**.
+**UnlimitedHugs** for providing the **Hugslib library**.
+
+# License
+
+This mod is licensed under the MIT license. You are allowed to use this in your modpacks.
 
 ![Image](https://i.imgur.com/PwoNOj4.png)
 

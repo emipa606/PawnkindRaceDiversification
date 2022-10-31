@@ -136,8 +136,7 @@ internal class ModSettingsHandler
 
             //Handle configuration
             var handle = pack.GetHandle(weightID, race, null, defaultValue, Validators.FloatRangeValidator(-1f, 1.0f));
-            handle.Unsaved = context == HandleContext.WORLD || context == HandleContext.STARTING ||
-                             context == HandleContext.LOCAL;
+            handle.Unsaved = context is HandleContext.WORLD or HandleContext.STARTING or HandleContext.LOCAL;
             handle.NeverVisible = true; //Never visible because it is handled by custom GUI instead
             handle.ValueChanged += delegate(SettingHandle newHandle)
             {
@@ -202,7 +201,7 @@ internal class ModSettingsHandler
         foreach (var defName in elements)
         {
             //Handle configuration
-            var id = handleName + "_" + defName;
+            var id = $"{handleName}_{defName}";
             var handle = pack.GetHandle(id, defName, null, defaultValue);
             handle.Unsaved = unsaved;
             handle.NeverVisible = true; //Never visible because it is handled by custom GUI instead
@@ -215,13 +214,13 @@ internal class ModSettingsHandler
         switch (context)
         {
             case HandleContext.GENERAL:
-                return "flatGenerationWeight_" + race;
+                return $"flatGenerationWeight_{race}";
             case HandleContext.WORLD:
-                return "flatGenerationWeightPerWorld_" + race;
+                return $"flatGenerationWeightPerWorld_{race}";
             case HandleContext.STARTING:
-                return "flatGenerationWeightStartingPawns_" + race;
+                return $"flatGenerationWeightStartingPawns_{race}";
             case HandleContext.LOCAL:
-                return "flatGenerationWeightLocal_" + race;
+                return $"flatGenerationWeightLocal_{race}";
         }
 
         return null;
@@ -244,12 +243,7 @@ internal class ModSettingsHandler
             return HandleContext.LOCAL;
         }
 
-        if (id.StartsWith("flatGenerationWeight"))
-        {
-            return HandleContext.GENERAL;
-        }
-
-        return HandleContext.NONE;
+        return id.StartsWith("flatGenerationWeight") ? HandleContext.GENERAL : HandleContext.NONE;
     }
 
     internal static void SyncWorldWeightsIntoLocalWeights()

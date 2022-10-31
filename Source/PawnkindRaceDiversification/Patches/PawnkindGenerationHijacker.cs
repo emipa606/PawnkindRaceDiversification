@@ -49,8 +49,8 @@ public static class PawnkindGenerationHijacker
                                          ModSettingsHandler.excludedFactions[request.Faction.def.defName])
             && !impliedRacesLoaded.Contains(request.KindDef.race.defName)
             && !weightGeneratorPaused
-            && !(request.Faction != null && (request.Faction.def.defName == "PawnmorpherPlayerColony" ||
-                                             request.Faction.def.defName == "PawnmorpherEnclave"))
+            && !(request.Faction != null &&
+                 request.Faction.def.defName is "PawnmorpherPlayerColony" or "PawnmorpherEnclave")
             && PrepareCarefullyTweaks.loadedAlienRace == "none"
             && IsValidAge(request.KindDef, request)
             && (checkingIfValidAtAll
@@ -78,16 +78,15 @@ public static class PawnkindGenerationHijacker
             {
                 if (ModSettingsHandler.DebugMode)
                 {
-                    PawnkindRaceDiversification.Logger.Message("Selecting race against " + request.KindDef.defName +
-                                                               "...");
+                    PawnkindRaceDiversification.Logger.Message($"Selecting race against {request.KindDef.defName}...");
                 }
 
                 //Change this kindDef's race to the selected race temporarily.
                 request.KindDef.race = WeightedRaceSelectionProcedure(request.KindDef, request.Faction);
                 if (ModSettingsHandler.DebugMode)
                 {
-                    PawnkindRaceDiversification.Logger.Message("The race was chosen to be: " +
-                                                               request.KindDef.race.defName);
+                    PawnkindRaceDiversification.Logger.Message(
+                        $"The race was chosen to be: {request.KindDef.race.defName}");
                 }
 
                 //Everything below has reliant changes to the prevKindsSet.
@@ -96,9 +95,8 @@ public static class PawnkindGenerationHijacker
 
                 if (ModSettingsHandler.DebugMode)
                 {
-                    PawnkindRaceDiversification.Logger.Message("Race selected successfully to " +
-                                                               request.KindDef.race.defName + " against pawnkind " +
-                                                               request.KindDef.defName);
+                    PawnkindRaceDiversification.Logger.Message(
+                        $"Race selected successfully to {request.KindDef.race.defName} against pawnkind {request.KindDef.defName}");
                 }
             }
         }
@@ -222,13 +220,13 @@ public static class PawnkindGenerationHijacker
             determinedWeights.SetOrAdd(kv.Key, kv.Value);
             if (ModSettingsHandler.DebugMode)
             {
-                dbgstrList += kv.Key + ": " + kv.Value + "\n";
+                dbgstrList += $"{kv.Key}: {kv.Value}\n";
             }
         }
 
         if (ModSettingsHandler.DebugMode)
         {
-            PawnkindRaceDiversification.Logger.Message("Flat weights found: \n" + dbgstrList);
+            PawnkindRaceDiversification.Logger.Message($"Flat weights found: \n{dbgstrList}");
             dbgstrList = "";
         }
 
@@ -245,13 +243,13 @@ public static class PawnkindGenerationHijacker
             determinedWeights.SetOrAdd(kv.Key, kv.Value);
             if (ModSettingsHandler.DebugMode)
             {
-                dbgstrList += kv.Key + ": " + kv.Value + "\n";
+                dbgstrList += $"{kv.Key}: {kv.Value}\n";
             }
         }
 
         if (ModSettingsHandler.DebugMode)
         {
-            PawnkindRaceDiversification.Logger.Message("Local save weights found: \n" + dbgstrList);
+            PawnkindRaceDiversification.Logger.Message($"Local save weights found: \n{dbgstrList}");
             dbgstrList = "";
         }
 
@@ -270,7 +268,7 @@ public static class PawnkindGenerationHijacker
                 determinedWeights.SetOrAdd(kv.Key, kv.Value);
                 if (ModSettingsHandler.DebugMode)
                 {
-                    dbgstrList += kv.Key + ": " + kv.Value + "\n";
+                    dbgstrList += $"{kv.Key}: {kv.Value}\n";
                 }
             }
         }
@@ -278,22 +276,21 @@ public static class PawnkindGenerationHijacker
         {
             if (ModSettingsHandler.DebugMode)
             {
-                PawnkindRaceDiversification.Logger.Warning("This pawn wasn't a part of the player faction (of " +
-                                                           faction.ToStringSafe() + ", " +
-                                                           (faction?.def?.isPlayer).ToStringSafe() + ") ");
+                PawnkindRaceDiversification.Logger.Warning(
+                    $"This pawn wasn't a part of the player faction (of {faction.ToStringSafe()}, {(faction?.def?.isPlayer).ToStringSafe()}) ");
             }
         }
 
         if (ModSettingsHandler.DebugMode)
         {
-            PawnkindRaceDiversification.Logger.Message("Starting pawn weights found: \n" + dbgstrList);
+            PawnkindRaceDiversification.Logger.Message($"Starting pawn weights found: \n{dbgstrList}");
             dbgstrList = "";
             foreach (var w in determinedWeights)
             {
-                dbgstrList += w.Key + ": " + w.Value + "\n";
+                dbgstrList += $"{w.Key}: {w.Value}\n";
             }
 
-            PawnkindRaceDiversification.Logger.Message("Final determined weights: \n" + dbgstrList);
+            PawnkindRaceDiversification.Logger.Message($"Final determined weights: \n{dbgstrList}");
         }
 
         //Calculate race selection with a weighting procedure
@@ -389,7 +386,7 @@ public static class PawnkindGenerationHijacker
         {
             if (ModSettingsHandler.DebugMode)
             {
-                PawnkindRaceDiversification.Logger.Message("Correcting backstory information for " + race + "... ");
+                PawnkindRaceDiversification.Logger.Message($"Correcting backstory information for {race}... ");
             }
 
             //Extension data
@@ -474,8 +471,8 @@ public static class PawnkindGenerationHijacker
         }
         else if (ModSettingsHandler.DebugMode)
         {
-            PawnkindRaceDiversification.Logger.Message(race +
-                                                       " does not have any extension data, therefore it cannot override backstories.");
+            PawnkindRaceDiversification.Logger.Message(
+                $"{race} does not have any extension data, therefore it cannot override backstories.");
         }
     }
 
@@ -504,11 +501,6 @@ public static class PawnkindGenerationHijacker
             */
         //Invalid if generated as a newborn or the kindDef's min and max generated age is 0
         //  Assumed to be a child
-        if (request.Newborn || kindDef.minGenerationAge == 0 && kindDef.maxGenerationAge == 0)
-        {
-            return false;
-        }
-
-        return true;
+        return kindDef.minGenerationAge != 0 || kindDef.maxGenerationAge != 0;
     }
 }

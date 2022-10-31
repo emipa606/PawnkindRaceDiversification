@@ -58,18 +58,17 @@ public class PawnkindRaceDiversification : ModBase
     {
         if (values.Length > 0)
         {
-            var ind = "\n\t";
             var msg = "";
-            msg += "Value output: " + ind;
+            msg += "Value output: \n\t";
             foreach (var v in values)
             {
                 try
                 {
-                    msg += v.GetType().Name + ": " + v + ind;
+                    msg += $"{v.GetType().Name}: {v}\n\t";
                 }
                 catch (Exception)
                 {
-                    msg += "Value errored" + ind;
+                    msg += "Value errored\n\t";
                 }
             }
 
@@ -86,7 +85,7 @@ public class PawnkindRaceDiversification : ModBase
         base.Initialize();
 
         //Print the version of PRD
-        Logger.Message("Initialized PRD version " + versionID);
+        Logger.Message($"Initialized PRD version {versionID}");
 
         //Find all active mods that this mod seeks.
         var mods = HugsLibUtility.GetAllActiveAssemblies().ToList();
@@ -144,8 +143,7 @@ public class PawnkindRaceDiversification : ModBase
             {
                 //Implied defs are automatically skipped...
                 //  Y'know, it would be a lot of work to patch ALL that author's implied defs!
-                if (fileName == "ImpliedDefs"
-                    || fileName == "Cobra_Hybrid")
+                if (fileName is "ImpliedDefs" or "Cobra_Hybrid")
                 {
                     impliedRacesLoaded.Add(def.defName);
                     continue;
@@ -220,12 +218,12 @@ public class PawnkindRaceDiversification : ModBase
                  * */
             foreach (var e in startingColonistEntries)
             {
-                e.factionDefs.RemoveAll(f => f.defName == "PlayerColony" || f.defName == "PlayerTribe");
+                e.factionDefs.RemoveAll(f => f.defName is "PlayerColony" or "PlayerTribe");
             }
 
             foreach (var e in wandererEntries)
             {
-                e.factionDefs.RemoveAll(f => f.defName == "PlayerColony" || f.defName == "PlayerTribe");
+                e.factionDefs.RemoveAll(f => f.defName is "PlayerColony" or "PlayerTribe");
             }
         }
 

@@ -110,7 +110,7 @@ public class PrepareCarefullyTweaks
     public static void IsPrepareCarefullyLoadingPawn(string name)
     {
         //PawnkindRaceDiversification.Logger.Message("Prepare carefully loaded a pawn: " + name);
-        Scribe.loader.InitLoading(Path.Combine(PC_Filepath, name + ".pcc"));
+        Scribe.loader.InitLoading(Path.Combine(PC_Filepath, $"{name}.pcc"));
         Scribe_Values.Look(ref loadedAlienRace, "HAR_AlienRace", "none");
         Scribe.loader.FinalizeLoading();
     }

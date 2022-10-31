@@ -349,12 +349,7 @@ public class WeightSettingsWindow : Window
         }
 
         //This does not display negatives (checkbox will check for that instead)
-        if (handle.Value >= 0.0f)
-        {
-            return handle.Value;
-        }
-
-        return 0.0f;
+        return handle.Value >= 0.0f ? handle.Value : 0.0f;
     }
 
     public void SetWeightReference(string race, float value)
