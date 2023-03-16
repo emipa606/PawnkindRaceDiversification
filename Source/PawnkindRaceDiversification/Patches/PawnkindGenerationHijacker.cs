@@ -52,7 +52,7 @@ public static class PawnkindGenerationHijacker
             && !(request.Faction != null &&
                  request.Faction.def.defName is "PawnmorpherPlayerColony" or "PawnmorpherEnclave")
             && PrepareCarefullyTweaks.loadedAlienRace == "none"
-            && IsValidAge(request.KindDef, request)
+            && IsValidAge(request.KindDef)
             && (checkingIfValidAtAll
                 || request.KindDef.race == ThingDefOf.Human && ModSettingsHandler.OverrideAllHumanPawnkinds
                 || request.KindDef.race != ThingDefOf.Human && ModSettingsHandler.OverrideAllAlienPawnkinds
@@ -382,7 +382,7 @@ public static class PawnkindGenerationHijacker
          */
         var race = pawnkindDef.race.defName; //Because the race should've been assigned to already
 
-        if (racesDiversified.ContainsKey(race))
+        if (racesDiversified.TryGetValue(race, out var raceExtensionData))
         {
             if (ModSettingsHandler.DebugMode)
             {
@@ -390,7 +390,6 @@ public static class PawnkindGenerationHijacker
             }
 
             //Extension data
-            var raceExtensionData = racesDiversified[race];
             FactionWeight factionWeightData = null;
             if (factionDef != null)
             {
@@ -477,7 +476,7 @@ public static class PawnkindGenerationHijacker
     }
 
     //Returns false if any conditions are met that would invalidate the age.
-    private static bool IsValidAge(PawnKindDef kindDef, PawnGenerationRequest request)
+    private static bool IsValidAge(PawnKindDef kindDef)
     {
         /*
         if (ModSettingsHandler.DebugMode)

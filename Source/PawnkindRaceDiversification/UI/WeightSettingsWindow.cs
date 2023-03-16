@@ -321,31 +321,33 @@ public class WeightSettingsWindow : Window
             return 0.0f;
         }
 
-        if (prevAdjustedRaces[race] && windowContext == context
-            || handle.Value < 0.0f && windowContext != context)
+        if ((!prevAdjustedRaces[race] || windowContext != context) &&
+            (!(handle.Value < 0.0f) || windowContext == context))
         {
-            if (returnNegative)
-            {
-                return -1.0f;
-            }
+            return handle.Value >= 0.0f ? handle.Value : 0.0f;
+        }
 
-            switch (context)
-            {
-                case HandleContext.STARTING:
-                    return GrabWeightReference(race, HandleContext.WORLD);
-                case HandleContext.WORLD:
-                case HandleContext.LOCAL:
-                    //This is performed so that it can also return the human's race setting
-                    return GrabWeightReference(race, HandleContext.GENERAL);
-                case HandleContext.GENERAL:
-                    var data = racesDiversified.FirstOrFallback(r => r.Key == race);
-                    if (data.Key != null)
-                    {
-                        return data.Value.flatGenerationWeight;
-                    }
+        if (returnNegative)
+        {
+            return -1.0f;
+        }
 
-                    break;
-            }
+        switch (context)
+        {
+            case HandleContext.STARTING:
+                return GrabWeightReference(race, HandleContext.WORLD);
+            case HandleContext.WORLD:
+            case HandleContext.LOCAL:
+                //This is performed so that it can also return the human's race setting
+                return GrabWeightReference(race, HandleContext.GENERAL);
+            case HandleContext.GENERAL:
+                var data = racesDiversified.FirstOrFallback(r => r.Key == race);
+                if (data.Key != null)
+                {
+                    return data.Value.flatGenerationWeight;
+                }
+
+                break;
         }
 
         //This does not display negatives (checkbox will check for that instead)

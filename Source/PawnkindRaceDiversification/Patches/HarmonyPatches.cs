@@ -62,11 +62,11 @@ internal static class HarmonyPatches
         ApplyPatchIntoMod(PawnkindRaceDiversification.SeekedMod.ANDROIDS, "DroidUtility", "MakeDroidTemplate", null,
             null, null, typeof(ChjeeDroidFixes).GetMethod("PawnHostilitySettingFix"));
         //Character Editor
-        ApplyPatchIntoMod(PawnkindRaceDiversification.SeekedMod.CHARACTER_EDITOR, "PresetPawn", "GeneratePawn", null,
-            typeof(AnyModGeneratedPawn).GetMethod("OnModGeneratingPawn"));
-        ApplyPatchIntoMod(PawnkindRaceDiversification.SeekedMod.CHARACTER_EDITOR, "PawnxTool",
-            "ReplacePawnWithPawnOfSameRace", null,
-            typeof(AnyModGeneratedPawn).GetMethod("OnModGeneratingPawn"));
+        //ApplyPatchIntoMod(PawnkindRaceDiversification.SeekedMod.CHARACTER_EDITOR, "PresetPawn", "GeneratePawn", null,
+        //    typeof(AnyModGeneratedPawn).GetMethod("OnModGeneratingPawn"));
+        //ApplyPatchIntoMod(PawnkindRaceDiversification.SeekedMod.CHARACTER_EDITOR, "PawnxTool",
+        //    "ReplacePawnWithPawnOfSameRace", null,
+        //    typeof(AnyModGeneratedPawn).GetMethod("OnModGeneratingPawn"));
     }
 
     private static void ApplyPatchIntoMod(PawnkindRaceDiversification.SeekedMod modToPatch, string className,
@@ -76,7 +76,7 @@ internal static class HarmonyPatches
         MethodInfo transpiler = null,
         MethodInfo finalizer = null)
     {
-        if (!PawnkindRaceDiversification.activeSeekedMods.Contains(modToPatch))
+        if (PawnkindRaceDiversification.activeSeekedMods?.Contains(modToPatch) == false)
         {
             return;
         }

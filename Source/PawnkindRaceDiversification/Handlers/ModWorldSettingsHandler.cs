@@ -34,7 +34,7 @@ internal class ModWorldSettingsHandler : WorldComponent
                 HandleContext.LOCAL);
             Find.WorldObjects.Remove(oldWorldSettings);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // ignored
         }
