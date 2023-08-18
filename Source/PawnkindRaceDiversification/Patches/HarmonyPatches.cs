@@ -43,9 +43,9 @@ internal static class HarmonyPatches
     internal static void PostInitPatches()
     {
         //Altered Carbon
-        ApplyPatchIntoMod(PawnkindRaceDiversification.SeekedMod.ALTERED_CARBON, "CustomizeSleeveWindow", "GetNewPawn",
-            null,
-            typeof(AnyModGeneratedPawn).GetMethod("OnModGeneratingPawn"));
+        //ApplyPatchIntoMod(PawnkindRaceDiversification.SeekedMod.ALTERED_CARBON, "CustomizeSleeveWindow", "GetNewPawn",
+        //    null,
+        //    typeof(AnyModGeneratedPawn).GetMethod("OnModGeneratingPawn"));
         //Prepare Carefully
         ApplyPatchIntoMod(PawnkindRaceDiversification.SeekedMod.PREPARE_CAREFULLY, "ColonistSaver", "SaveToFile", null,
             null, null, typeof(PrepareCarefullyTweaks).GetMethod("SavingMethodInsertionTranspiler"));

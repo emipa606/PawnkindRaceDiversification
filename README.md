@@ -93,4 +93,4 @@ This mod is licensed under the MIT license. You are allowed to use this in your 
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
 
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2828866565]Last updated 2023-03-16
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2828866565]Last updated 2023-08-18

@@ -1,5 +1,8 @@
 # Changelog for PawnkindRaceDiversification
 
+1.4.3 - Removed legacy patch for Altred Carbon, thanks thailyn for the info
+
+
 1.4.2 - Removed broken harmony-patches
 
 
