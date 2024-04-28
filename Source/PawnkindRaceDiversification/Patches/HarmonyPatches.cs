@@ -16,17 +16,15 @@ internal static class HarmonyPatches
     static HarmonyPatches()
     {
         //Pawn generation hijacker
-        Patch(AccessTools.Method(typeof(PawnGenerator), "GeneratePawn", new[]
-        {
+        Patch(AccessTools.Method(typeof(PawnGenerator), "GeneratePawn", [
             typeof(PawnGenerationRequest)
-        }), typeof(PawnkindGenerationHijacker).GetMethod("DetermineRace"));
+        ]), typeof(PawnkindGenerationHijacker).GetMethod("DetermineRace"));
         //World related settings
         Patch(AccessTools.Method(typeof(WorldGenerator), "GenerateWorld"),
             typeof(WorldRelatedPatches).GetMethod("OnGeneratingWorld"));
-        Patch(AccessTools.Method(typeof(Page_CreateWorldParams), "DoWindowContents", new[]
-            {
+        Patch(AccessTools.Method(typeof(Page_CreateWorldParams), "DoWindowContents", [
                 typeof(Rect)
-            }),
+            ]),
             null, null, typeof(WorldRelatedPatches).GetMethod("WorldWeightSettingsInWorldPage"));
         //World params will reset on CreateWorldParams resetting, ConfigureStartingPawns going next,
         //  or from entering the main menu.
@@ -34,7 +32,7 @@ internal static class HarmonyPatches
             null, typeof(WorldParamsReset).GetMethod("OnResetCreateWorldParams"));
         Patch(AccessTools.Method(typeof(Page_ConfigureStartingPawns), "DoNext"),
             typeof(WorldParamsReset).GetMethod("OnResetCreateWorldParams"));
-        Patch(AccessTools.Method(typeof(GameDataSaveLoader), "LoadGame", new[] { typeof(string) }),
+        Patch(AccessTools.Method(typeof(GameDataSaveLoader), "LoadGame", [typeof(string)]),
             typeof(WorldParamsReset).GetMethod("OnResetCreateWorldParams"));
     }
 

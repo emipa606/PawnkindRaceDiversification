@@ -14,7 +14,9 @@ public class WeightSettingsWindow : Window
     private readonly Dictionary<string, bool> prevAdjustedRaces = new Dictionary<string, bool>();
     private readonly Vector2 regularButtonSize = new Vector2(160f, 46f);
     private readonly Dictionary<string, float> spawnChancesVisual = new Dictionary<string, float>();
+    public readonly HandleContext windowContext;
     private readonly string windowDesc = "No description";
+    public readonly List<SettingHandle<float>> windowHandles;
     private readonly string windowTitle = "Weight Settings Window";
     private Rect btnAccept;
     private Vector2 listButtonSize = new Vector2(84f, 24f);
@@ -23,9 +25,7 @@ public class WeightSettingsWindow : Window
     private Rect quickAdjustRect;
 
     private Vector2 scrollPosition = new Vector2(0f, 0f);
-    public HandleContext windowContext;
     private Rect windowDescRect;
-    public List<SettingHandle<float>> windowHandles;
 
     private Rect windowTitleRect;
 

@@ -2,6 +2,4 @@
 
 namespace PawnkindRaceDiversification.Extensions;
 
-public class RaceRandomizationExcluded : DefModExtension
-{
-}
+public class RaceRandomizationExcluded : DefModExtension;

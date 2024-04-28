@@ -17,10 +17,9 @@ public class PrepareCarefullyTweaks
 
     private static readonly string PC_Filepath = (string)typeof(GenFilePaths)
         .GetMethod("FolderUnderSaveData", BindingFlags.Static | BindingFlags.NonPublic)
-        ?.Invoke(null, new object[]
-        {
+        ?.Invoke(null, [
             "PrepareCarefully"
-        });
+        ]);
 
     //Transpiler method
     //  Inserts the harmony patch method OnPrepareCarefullySavingPawn(colonistName)

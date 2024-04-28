@@ -9,11 +9,11 @@ namespace PawnkindRaceDiversification.UI;
 public class FactionExclusionWindow : Window
 {
     private readonly Vector2 regularButtonSize = new Vector2(160f, 46f);
+    protected readonly string windowDescription = "PawnkindRaceDiversity_FactionExclusionWindowDescription";
+    protected readonly string windowTitle = "PawnkindRaceDiversity_FactionExclusionWindowTitle";
     private Rect btnAccept;
     private Vector2 scrollPosition = new Vector2(0f, 0f);
     private Rect windowDescRect;
-    protected string windowDescription = "PawnkindRaceDiversity_FactionExclusionWindowDescription";
-    protected string windowTitle = "PawnkindRaceDiversity_FactionExclusionWindowTitle";
 
     private Rect windowTitleRect;
 

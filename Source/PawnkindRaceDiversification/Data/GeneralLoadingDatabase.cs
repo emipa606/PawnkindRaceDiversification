@@ -5,15 +5,15 @@ namespace PawnkindRaceDiversification.Data;
 
 internal sealed class GeneralLoadingDatabase
 {
-    internal static List<string> impliedRacesLoaded = new List<string>();
-    internal static List<string> pawnKindDefsExcluded = new List<string>();
-    internal static List<FactionDef> factionsWithHumanlikesLoaded = new List<FactionDef>();
-    internal static Dictionary<string, string> pawnKindRaceDefRelations = new Dictionary<string, string>();
+    internal static readonly List<string> impliedRacesLoaded = [];
+    internal static readonly List<string> pawnKindDefsExcluded = [];
+    internal static readonly List<FactionDef> factionsWithHumanlikesLoaded = [];
+    internal static readonly Dictionary<string, string> pawnKindRaceDefRelations = new Dictionary<string, string>();
 
-    internal static Dictionary<string, List<BackstoryCategoryFilter>> defaultFactionBackstorySettings =
+    internal static readonly Dictionary<string, List<BackstoryCategoryFilter>> defaultFactionBackstorySettings =
         new Dictionary<string, List<BackstoryCategoryFilter>>();
 
-    internal static Dictionary<string, PrevKindSettings> defaultKindBackstorySettings =
+    internal static readonly Dictionary<string, PrevKindSettings> defaultKindBackstorySettings =
         new Dictionary<string, PrevKindSettings>();
 
     internal class PrevKindSettings

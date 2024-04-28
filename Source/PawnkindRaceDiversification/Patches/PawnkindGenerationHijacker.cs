@@ -26,43 +26,38 @@ public static class PawnkindGenerationHijacker
         //These steps make sure whether it is really necessary to modify this pawn
         //   or not.
         /*Precautions taken:
-            *  1.) kindDef isn't null
-            *  2.) kindDef is a humanlike
-            *  3.) kindDef isn't an excluded kind def
-            *  4.) faction is excluded from the list of factions blacklisted from being overridden
-            *  5.) raceDef isn't an implied race (pawnmorpher compatibility)
-            *  6.) The weight generator isn't paused
-            *  7.) faction isn't the pawnmorpher factions (pawnmorpher compatibility)
-            *  8.) Prepare Carefully isn't doing anything
-            *  9.) The age of this request is consistent with the age of the race
-            *  10.) Validator is checking if this request is valid at all from the above statements
-            *       OR OTHERWISE:
-            *           kindDef is human and settings want to override all human pawnkinds
-            *               OR kindDef is not a human and settings want to override all alien pawnkinds
-            *               OR kindDef is not a human and world settings allow starting pawnkinds to be overridden
-        * */
-        if (request.KindDef is { RaceProps.Humanlike: true }
-            && !pawnKindDefsExcluded.Contains(request.KindDef.defName)
-            && !(request.Faction != null && factionsWithHumanlikesLoaded.Contains(request.Faction.def)
-                                         && ModSettingsHandler.excludedFactions.ContainsKey(request.Faction.def
-                                             .defName) &&
-                                         ModSettingsHandler.excludedFactions[request.Faction.def.defName])
-            && !impliedRacesLoaded.Contains(request.KindDef.race.defName)
-            && !weightGeneratorPaused
-            && !(request.Faction != null &&
-                 request.Faction.def.defName is "PawnmorpherPlayerColony" or "PawnmorpherEnclave")
-            && PrepareCarefullyTweaks.loadedAlienRace == "none"
-            && IsValidAge(request.KindDef)
-            && (checkingIfValidAtAll
-                || request.KindDef.race == ThingDefOf.Human && ModSettingsHandler.OverrideAllHumanPawnkinds
-                || request.KindDef.race != ThingDefOf.Human && ModSettingsHandler.OverrideAllAlienPawnkinds
-                || request.KindDef.race != ThingDefOf.Human && request.Faction != null &&
-                request.Faction.def.isPlayer && ModSettingsHandler.OverrideAllAlienPawnkindsFromStartingPawns))
-        {
-            return true;
-        }
-
-        return false;
+         *  1.) kindDef isn't null
+         *  2.) kindDef is a humanlike
+         *  3.) kindDef isn't an excluded kind def
+         *  4.) faction is excluded from the list of factions blacklisted from being overridden
+         *  5.) raceDef isn't an implied race (pawnmorpher compatibility)
+         *  6.) The weight generator isn't paused
+         *  7.) faction isn't the pawnmorpher factions (pawnmorpher compatibility)
+         *  8.) Prepare Carefully isn't doing anything
+         *  9.) The age of this request is consistent with the age of the race
+         *  10.) Validator is checking if this request is valid at all from the above statements
+         *       OR OTHERWISE:
+         *           kindDef is human and settings want to override all human pawnkinds
+         *               OR kindDef is not a human and settings want to override all alien pawnkinds
+         *               OR kindDef is not a human and world settings allow starting pawnkinds to be overridden
+         * */
+        return request.KindDef is { RaceProps.Humanlike: true }
+               && !pawnKindDefsExcluded.Contains(request.KindDef.defName)
+               && !(request.Faction != null && factionsWithHumanlikesLoaded.Contains(request.Faction.def)
+                                            && ModSettingsHandler.excludedFactions.ContainsKey(request.Faction.def
+                                                .defName) &&
+                                            ModSettingsHandler.excludedFactions[request.Faction.def.defName])
+               && !impliedRacesLoaded.Contains(request.KindDef.race.defName)
+               && !weightGeneratorPaused
+               && !(request.Faction != null &&
+                    request.Faction.def.defName is "PawnmorpherPlayerColony" or "PawnmorpherEnclave")
+               && PrepareCarefullyTweaks.loadedAlienRace == "none"
+               && IsValidAge(request.KindDef)
+               && (checkingIfValidAtAll
+                   || request.KindDef.race == ThingDefOf.Human && ModSettingsHandler.OverrideAllHumanPawnkinds
+                   || request.KindDef.race != ThingDefOf.Human && ModSettingsHandler.OverrideAllAlienPawnkinds
+                   || request.KindDef.race != ThingDefOf.Human && request.Faction != null &&
+                   request.Faction.def.isPlayer && ModSettingsHandler.OverrideAllAlienPawnkindsFromStartingPawns);
     }
 
     //Harmony manual prefix method
@@ -154,7 +149,7 @@ public static class PawnkindGenerationHijacker
          *          *3.) Flat weight (set by AlienRace XML)
          *              + **Pawnkind weight
          *              + **Faction weight
-         *      *Weight chance increases from these conditions, but flat weight in settings overrides these
+         *      *chance increases from these conditions, but flat weight in settings overrides these
          *      **If either of these weights are negative, then this pawn cannot spawn in these conditions
          * */
         var determinedWeights = new Dictionary<string, float>();
@@ -407,37 +402,37 @@ public static class PawnkindGenerationHijacker
             var factionBackstoryOverride = false;
 
             //Procedure
-            backstoryCategories.AddRange(pawnkindWeightData?.backstoryCategories ?? new List<string>());
+            backstoryCategories.AddRange(pawnkindWeightData?.backstoryCategories ?? []);
             backstoryPawnkindFilters.AddRange(pawnkindWeightData?.backstoryFilters ??
-                                              new List<BackstoryCategoryFilter>());
+                                              []);
             var pawnkindBackstoryOverride = pawnkindWeightData?.overrideBackstories ?? false;
             if (!pawnkindBackstoryOverride
                 && !raceExtensionData.overrideBackstories)
             {
-                backstoryCategories.AddRange(pawnkindDef.backstoryCategories ?? new List<string>());
-                backstoryPawnkindFilters.AddRange(pawnkindDef.backstoryFilters ?? new List<BackstoryCategoryFilter>());
+                backstoryCategories.AddRange(pawnkindDef.backstoryCategories ?? []);
+                backstoryPawnkindFilters.AddRange(pawnkindDef.backstoryFilters ?? []);
             }
 
             if (!pawnkindBackstoryOverride)
             {
-                backstoryCategories.AddRange(factionWeightData?.backstoryCategories ?? new List<string>());
+                backstoryCategories.AddRange(factionWeightData?.backstoryCategories ?? []);
                 backstoryFactionFilters.AddRange(factionWeightData?.backstoryFilters ??
-                                                 new List<BackstoryCategoryFilter>());
+                                                 []);
                 factionBackstoryOverride = factionWeightData?.overrideBackstories ?? false;
                 if (!factionBackstoryOverride
                     && !raceExtensionData.overrideBackstories)
                 {
                     backstoryFactionFilters.AddRange(
-                        factionDef?.backstoryFilters ?? new List<BackstoryCategoryFilter>());
+                        factionDef?.backstoryFilters ?? []);
                 }
             }
 
             if (!pawnkindBackstoryOverride
                 && !factionBackstoryOverride)
             {
-                backstoryCategories.AddRange(raceExtensionData.backstoryCategories ?? new List<string>());
+                backstoryCategories.AddRange(raceExtensionData.backstoryCategories ?? []);
                 backstoryFactionFilters.AddRange(raceExtensionData.backstoryFilters ??
-                                                 new List<BackstoryCategoryFilter>());
+                                                 []);
             }
 
             //Failsafe

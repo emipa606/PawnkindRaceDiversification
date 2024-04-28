@@ -18,8 +18,8 @@ namespace PawnkindRaceDiversification;
 
 public class PawnkindRaceDiversification : ModBase
 {
-    internal static int versionID = 35;
-    internal static readonly List<SeekedMod> activeSeekedMods = new List<SeekedMod>();
+    internal static readonly int versionID = 35;
+    internal static readonly List<SeekedMod> activeSeekedMods = [];
 
     private static readonly Dictionary<string, SeekedMod> seekedModAssemblies = new Dictionary<string, SeekedMod>
     {
@@ -114,7 +114,7 @@ public class PawnkindRaceDiversification : ModBase
         }
 
         //Finds def of all races currently loaded (courtesy goes to DubWise)
-        //  Also selects race settings to cherry pick a few things off of it
+        //  Also selects race settings to cherry-pick a few things off of it
         //  and looks through all loaded pawnkind defs to reassign its defaults after modifying them at runtime.
         var raceNames = new List<string>();
         var alienRaceDefs = (from x in DefDatabase<ThingDef_AlienRace>.AllDefs
@@ -208,14 +208,14 @@ public class PawnkindRaceDiversification : ModBase
                 where w.factionDefs.Count > 0
                 select w).ToList();
             /*  So I didn't completely remove these race settings for two reasons:
-                 *      1.) Some race mods want these so that they have different pawnkind varieties for their
-                 *          specific faction races.
-                 *      2.) It would be destructive and barbaric to assume that ALL race mods bother the player
-                 *          colony factions.
-                 *  Therefore, all this does is remove the player factions from race settings that try to
-                 *  modify it. Settings without factions specified don't do anything (therefore, this is a
-                 *  safe procedure).
-                 * */
+             *      1.) Some race mods want these so that they have different pawnkind varieties for their
+             *          specific faction races.
+             *      2.) It would be destructive and barbaric to assume that ALL race mods bother the player
+             *          colony factions.
+             *  Therefore, all this does is remove the player factions from race settings that try to
+             *  modify it. Settings without factions specified don't do anything (therefore, this is a
+             *  safe procedure).
+             * */
             foreach (var e in startingColonistEntries)
             {
                 e.factionDefs.RemoveAll(f => f.defName is "PlayerColony" or "PlayerTribe");

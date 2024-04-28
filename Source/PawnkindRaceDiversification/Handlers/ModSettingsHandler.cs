@@ -23,12 +23,12 @@ internal class ModSettingsHandler
     internal static Dictionary<string, SettingHandle<bool>> excludedFactions =
         new Dictionary<string, SettingHandle<bool>>();
 
-    internal static Dictionary<string, float> setFlatWeights = new Dictionary<string, float>();
+    internal static readonly Dictionary<string, float> setFlatWeights = new Dictionary<string, float>();
     internal static Dictionary<string, float> setLocalFlatWeights = new Dictionary<string, float>();
     internal static Dictionary<string, float> setLocalWorldWeights = new Dictionary<string, float>();
     internal static Dictionary<string, float> setLocalStartingPawnWeights = new Dictionary<string, float>();
-    internal static List<SettingHandle<float>> allHandleReferences = new List<SettingHandle<float>>();
-    internal static List<string> evaluatedRaces = new List<string>();
+    internal static readonly List<SettingHandle<float>> allHandleReferences = [];
+    internal static List<string> evaluatedRaces = [];
 
     internal void PrepareSettingHandles(ModSettingsPack pack, List<string> races)
     {
