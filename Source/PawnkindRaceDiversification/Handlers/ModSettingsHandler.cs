@@ -13,20 +13,19 @@ namespace PawnkindRaceDiversification.Handlers;
 
 internal class ModSettingsHandler
 {
-    internal const string showSettingsValid = "PawnkindRaceDiversity_Category_ShowSettings";
+    private const string showSettingsValid = "PawnkindRaceDiversity_Category_ShowSettings";
     internal static SettingHandle<bool> DebugMode;
     internal static SettingHandle<bool> OverrideAllHumanPawnkinds;
     internal static SettingHandle<bool> OverrideAllAlienPawnkinds;
     internal static bool OverrideAllAlienPawnkindsFromStartingPawns = false;
     internal static SettingHandle<bool> OverridePawnsWithInconsistentAges;
 
-    internal static Dictionary<string, SettingHandle<bool>> excludedFactions =
-        new Dictionary<string, SettingHandle<bool>>();
+    internal static Dictionary<string, SettingHandle<bool>> excludedFactions = new();
 
-    internal static readonly Dictionary<string, float> setFlatWeights = new Dictionary<string, float>();
-    internal static Dictionary<string, float> setLocalFlatWeights = new Dictionary<string, float>();
-    internal static Dictionary<string, float> setLocalWorldWeights = new Dictionary<string, float>();
-    internal static Dictionary<string, float> setLocalStartingPawnWeights = new Dictionary<string, float>();
+    internal static readonly Dictionary<string, float> setFlatWeights = new();
+    internal static Dictionary<string, float> setLocalFlatWeights = new();
+    internal static Dictionary<string, float> setLocalWorldWeights = new();
+    internal static Dictionary<string, float> setLocalStartingPawnWeights = new();
     internal static readonly List<SettingHandle<float>> allHandleReferences = [];
     internal static List<string> evaluatedRaces = [];
 

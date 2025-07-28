@@ -8,7 +8,7 @@ namespace PawnkindRaceDiversification.Handlers;
 [Obsolete("No longer used after 1.3.")]
 internal class ModSettingsWorldStorage : UtilityWorldObject
 {
-    public Dictionary<string, float> oldLocalFlatWeights = new Dictionary<string, float>();
+    public Dictionary<string, float> oldLocalFlatWeights = new();
 
     public override void ExposeData()
     {

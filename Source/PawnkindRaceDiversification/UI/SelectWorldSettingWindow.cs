@@ -6,7 +6,7 @@ namespace PawnkindRaceDiversification.UI;
 
 public class SelectWorldSettingWindow : Window
 {
-    private readonly Vector2 regularButtonSize = new Vector2(260f, 28f);
+    private readonly Vector2 regularButtonSize = new(260f, 28f);
     private Rect btnStartingAdjustments;
     private Rect btnWorldAdjustments;
     private Rect overrideStartingAlienPawnkindsRect;
@@ -21,7 +21,7 @@ public class SelectWorldSettingWindow : Window
         doCloseX = true;
     }
 
-    public override Vector2 InitialSize => new Vector2(300f, 250f);
+    public override Vector2 InitialSize => new(300f, 250f);
 
     public override void DoWindowContents(Rect inRect)
     {

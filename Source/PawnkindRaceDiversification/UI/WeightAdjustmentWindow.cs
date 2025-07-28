@@ -7,7 +7,7 @@ public class WeightAdjustmentWindow : Window
 {
     private readonly WeightSettingsWindow parent;
     private readonly string raceAdjusting;
-    private readonly Vector2 regularButtonSize = new Vector2(160f, 46f);
+    private readonly Vector2 regularButtonSize = new(160f, 46f);
     private readonly string windowTitle = "PawnkindRaceDiversity_AdjustmentWindowTitle";
     private Rect btnAccept;
     private float outFlatWeight;
@@ -27,7 +27,7 @@ public class WeightAdjustmentWindow : Window
         onlyOneOfTypeAllowed = true;
     }
 
-    public override Vector2 InitialSize => new Vector2(300f, 380f);
+    public override Vector2 InitialSize => new(300f, 380f);
 
     public override void DoWindowContents(Rect inRect)
     {

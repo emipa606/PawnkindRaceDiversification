@@ -10,21 +10,21 @@ namespace PawnkindRaceDiversification.UI;
 
 public class WeightSettingsWindow : Window
 {
-    private readonly Dictionary<string, string> inputBoxRaceValue = new Dictionary<string, string>();
-    private readonly Dictionary<string, bool> prevAdjustedRaces = new Dictionary<string, bool>();
-    private readonly Vector2 regularButtonSize = new Vector2(160f, 46f);
-    private readonly Dictionary<string, float> spawnChancesVisual = new Dictionary<string, float>();
+    private readonly Dictionary<string, string> inputBoxRaceValue = new();
+    private readonly Dictionary<string, bool> prevAdjustedRaces = new();
+    private readonly Vector2 regularButtonSize = new(160f, 46f);
+    private readonly Dictionary<string, float> spawnChancesVisual = new();
     public readonly HandleContext windowContext;
     private readonly string windowDesc = "No description";
     public readonly List<SettingHandle<float>> windowHandles;
     private readonly string windowTitle = "Weight Settings Window";
     private Rect btnAccept;
-    private Vector2 listButtonSize = new Vector2(84f, 24f);
+    private Vector2 listButtonSize = new(84f, 24f);
     private bool quickAdjust;
     private bool quickAdjustInitializedFlag;
     private Rect quickAdjustRect;
 
-    private Vector2 scrollPosition = new Vector2(0f, 0f);
+    private Vector2 scrollPosition = new(0f, 0f);
     private Rect windowDescRect;
 
     private Rect windowTitleRect;
@@ -59,7 +59,7 @@ public class WeightSettingsWindow : Window
         EvaluateWhichDefsAreAdjusted();
     }
 
-    public override Vector2 InitialSize => new Vector2(760f, 730f);
+    public override Vector2 InitialSize => new(760f, 730f);
 
     public override void DoWindowContents(Rect inRect)
     {

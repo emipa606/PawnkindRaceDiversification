@@ -18,10 +18,10 @@ namespace PawnkindRaceDiversification;
 
 public class PawnkindRaceDiversification : ModBase
 {
-    internal static readonly int versionID = 35;
+    private static readonly int versionID = 35;
     internal static readonly List<SeekedMod> activeSeekedMods = [];
 
-    private static readonly Dictionary<string, SeekedMod> seekedModAssemblies = new Dictionary<string, SeekedMod>
+    private static readonly Dictionary<string, SeekedMod> seekedModAssemblies = new()
     {
         { "Pawnmorph", SeekedMod.PAWNMORPHER },
         { "AlteredCarbon", SeekedMod.ALTERED_CARBON },
@@ -30,17 +30,16 @@ public class PawnkindRaceDiversification : ModBase
         { "CharacterEditor", SeekedMod.CHARACTER_EDITOR }
     };
 
-    internal static readonly Dictionary<SeekedMod, Assembly> referencedModAssemblies =
-        new Dictionary<SeekedMod, Assembly>();
+    internal static readonly Dictionary<SeekedMod, Assembly> referencedModAssemblies = new();
 
     private PawnkindRaceDiversification()
     {
         Instance = this;
     }
 
-    internal static PawnkindRaceDiversification Instance { get; private set; }
-    internal static Harmony harmony => new Harmony("SEW_PRD_Harmony");
-    internal ModSettingsHandler SettingsHandler { get; private set; }
+    private static PawnkindRaceDiversification Instance { get; set; }
+    internal static Harmony harmony => new("SEW_PRD_Harmony");
+    private ModSettingsHandler SettingsHandler { get; set; }
 
     public override string ModIdentifier => "PawnkindRaceDiversification";
 
@@ -134,7 +133,7 @@ public class PawnkindRaceDiversification : ModBase
             if (def.fileName != null)
             {
                 fileName = def.fileName.Contains('.')
-                    ? def.fileName.Substring(0, def.fileName.IndexOf('.'))
+                    ? def.fileName[..def.fileName.IndexOf('.')]
                     : def.fileName;
             }
 

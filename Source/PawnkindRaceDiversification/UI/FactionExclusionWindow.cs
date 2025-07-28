@@ -8,11 +8,11 @@ namespace PawnkindRaceDiversification.UI;
 
 public class FactionExclusionWindow : Window
 {
-    private readonly Vector2 regularButtonSize = new Vector2(160f, 46f);
-    protected readonly string windowDescription = "PawnkindRaceDiversity_FactionExclusionWindowDescription";
-    protected readonly string windowTitle = "PawnkindRaceDiversity_FactionExclusionWindowTitle";
+    private readonly Vector2 regularButtonSize = new(160f, 46f);
+    private readonly string windowDescription = "PawnkindRaceDiversity_FactionExclusionWindowDescription";
+    private readonly string windowTitle = "PawnkindRaceDiversity_FactionExclusionWindowTitle";
     private Rect btnAccept;
-    private Vector2 scrollPosition = new Vector2(0f, 0f);
+    private Vector2 scrollPosition = new(0f, 0f);
     private Rect windowDescRect;
 
     private Rect windowTitleRect;
@@ -24,7 +24,7 @@ public class FactionExclusionWindow : Window
         onlyOneOfTypeAllowed = true;
     }
 
-    public override Vector2 InitialSize => new Vector2(340f, 720f);
+    public override Vector2 InitialSize => new(340f, 720f);
 
     public override void DoWindowContents(Rect inRect)
     {
