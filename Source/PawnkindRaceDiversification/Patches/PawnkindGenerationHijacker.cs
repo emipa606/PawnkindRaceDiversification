@@ -21,7 +21,7 @@ public static class PawnkindGenerationHijacker
         weightGeneratorPaused = true;
     }
 
-    public static bool IsKindValid(PawnGenerationRequest request, bool checkingIfValidAtAll)
+    private static bool IsKindValid(PawnGenerationRequest request, bool checkingIfValidAtAll)
     {
         //These steps make sure whether it is really necessary to modify this pawn
         //   or not.
@@ -128,11 +128,8 @@ public static class PawnkindGenerationHijacker
             ? racesLoaded.TryGetValue(raceDefName)
             : racesLoaded.First(r => r.Key.ToLower() == "human").Value;
         //Always reset the pawn's backstory information before determining race.
-        if (request.Faction != null)
-        {
-            request.Faction.def.backstoryFilters =
-                defaultFactionBackstorySettings[request.Faction.def.defName].ListFullCopyOrNull();
-        }
+        request.Faction?.def.backstoryFilters =
+            defaultFactionBackstorySettings[request.Faction.def.defName].ListFullCopyOrNull();
 
         request.KindDef.backstoryCategories = defaultKindBackstorySettings[request.KindDef.defName]
             .prevPawnkindBackstoryCategories.ListFullCopyOrNull();
@@ -140,7 +137,7 @@ public static class PawnkindGenerationHijacker
             .prevPawnkindBackstoryCategoryFilters.ListFullCopyOrNull();
     }
 
-    public static ThingDef WeightedRaceSelectionProcedure(PawnKindDef pawnKind, Faction faction)
+    private static ThingDef WeightedRaceSelectionProcedure(PawnKindDef pawnKind, Faction faction)
     {
         /*      Precedences for weights (first-to-last):
          *          1.) Flat weight (user settings per-save)
@@ -319,54 +316,6 @@ public static class PawnkindGenerationHijacker
         return pawnKind.race;
     }
 
-    /* Good news! Looking at HAR's code, this seems to have been made redundant.
-     * This will be commented out in case it is needed ever again.
-    private static void StyleFixProcedure(PawnKindDef pawnkindDef)
-    {
-        //HAR does not handle hair generation for pawnkinds, therefore I will fix this myself.
-        //  To revert to default behavior that HAR already does with factions, I can temporarily set
-        //  the pawnkind hairtags to null in order to stop forced hair generation.
-        //Pawns that are allowed to have forced hair are pawns that already do spawn with hair (will change this later).
-        //  However, pawns that are not supposed to spawn with hair should not have forced pawnkind hair gen.
-        if (pawnkindDef?.styleItemTags != null)
-        {
-            Dictionary<Type, StyleSettings> loadedStyleSettings = raceStyleData.TryGetValue(pawnkindDef.race.defName);
-            if (loadedStyleSettings != null)
-            {
-                List<StyleItemTagWeighted> insertedStyleItemTags = new List<StyleItemTagWeighted>();
-                List<StyleItemTagWeighted> overriddenStyleItemTags = new List<StyleItemTagWeighted>();
-                bool foundOverrides = false;
-                prevPawnkindItemSettings = pawnkindDef.styleItemTags;
-                //Start finding tag overrides first
-                foreach (KeyValuePair<Type, StyleSettings> ts in loadedStyleSettings)
-                {
-                    if (ts.Value != null
-                        && ts.Value.hasStyle
-                        && (ts.Key == typeof(TattooDef) && ModLister.IdeologyInstalled)
-                        && ((ts.Value.styleTags?.Count > 0) || (ts.Value.styleTagsOverride?.Count > 0)))
-                    {
-                        if (ts.Value.styleTags != null)
-                            foreach (string s in ts.Value.styleTags)
-                            {
-                                insertedStyleItemTags.Add(new StyleItemTagWeighted(s, 1.0f));
-                                overriddenStyleItemTags.Add(new StyleItemTagWeighted(s, 1.0f));
-                            }
-                        if (ts.Value.styleTagsOverride != null)
-                            foreach (string s in ts.Value.styleTagsOverride)
-                            {
-                                overriddenStyleItemTags.Add(new StyleItemTagWeighted(s, 1.0f));
-                                foundOverrides = true;
-                            }
-                    }
-                }
-                if (foundOverrides)
-                    pawnkindDef.styleItemTags = overriddenStyleItemTags;
-                else if (insertedStyleItemTags.Count > 0)
-                    pawnkindDef.styleItemTags?.AddRange(insertedStyleItemTags);
-            }
-        }
-    }
-    */
 
     private static void BackstoryInjectionProcedure(PawnKindDef pawnkindDef, FactionDef factionDef)
     {
@@ -389,11 +338,11 @@ public static class PawnkindGenerationHijacker
             if (factionDef != null)
             {
                 factionWeightData =
-                    raceExtensionData.factionWeights?.FirstOrFallback(w => w.factionDef == factionDef.defName);
+                    raceExtensionData.factionWeights?.FirstOrFallback(w => w?.factionDef == factionDef.defName);
             }
 
             var pawnkindWeightData =
-                raceExtensionData.pawnKindWeights?.FirstOrFallback(w => w.pawnKindDef == pawnkindDef.defName);
+                raceExtensionData.pawnKindWeights?.FirstOrFallback(w => w?.pawnKindDef == pawnkindDef.defName);
 
             //Handled backstory data
             var backstoryCategories = new List<string>();
@@ -450,10 +399,7 @@ public static class PawnkindGenerationHijacker
             }
 
             //Assignment
-            if (factionDef != null)
-            {
-                factionDef.backstoryFilters = backstoryFactionFilters;
-            }
+            factionDef?.backstoryFilters = backstoryFactionFilters;
 
             pawnkindDef.backstoryCategories = backstoryCategories;
             pawnkindDef.backstoryFilters = backstoryPawnkindFilters;
@@ -473,26 +419,12 @@ public static class PawnkindGenerationHijacker
     //Returns false if any conditions are met that would invalidate the age.
     private static bool IsValidAge(PawnKindDef kindDef)
     {
-        /*
-        if (ModSettingsHandler.DebugMode)
-            PawnkindRaceDiversification.Logger.Message("Generated biological age: " + biologicalAge.ToString() + "\n"
-                + "Minimum allowed age: " + kindDef.race.race.ageGenerationCurve.Points[0].x.ToString() + "\n"
-                + "Maximum allowed age: " + kindDef.race.race.ageGenerationCurve.Points[kindDef.race.race.ageGenerationCurve.Points.Capacity - 1].x.ToString());
-        */
         //Only invalidates if settings don't allow age overriding
         if (ModSettingsHandler.OverridePawnsWithInconsistentAges)
         {
             return true;
         }
 
-        //Invalid if younger than or older than what's supposed to be generated (doesn't appear to be used)
-        /*
-            if (kindDef.race.race.ageGenerationCurve.Points[0].x > biologicalAge
-                || kindDef.race.race.ageGenerationCurve.Points[kindDef.race.race.ageGenerationCurve.Points.Capacity - 1].x < biologicalAge)
-            {
-                return false;
-            }
-            */
         //Invalid if generated as a newborn or the kindDef's min and max generated age is 0
         //  Assumed to be a child
         return kindDef.minGenerationAge != 0 || kindDef.maxGenerationAge != 0;

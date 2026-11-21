@@ -33,9 +33,8 @@ public class PrepareCarefullyTweaks
         for (var i = 0; i < codes.Count; i++)
         {
             if (codes[i].opcode == OpCodes.Call
-                && codes[i].operand.ToString().Contains("Void Look[SaveRecordPawnV"))
+                && codes[i].operand.ToString()!.Contains("Void Look[SaveRecordPawnV"))
             {
-                //PawnkindRaceDiversification.Logger.Message("Found the method, injecting my save method into it");
                 insertionIndex = i + 1;
             }
         }
@@ -72,9 +71,8 @@ public class PrepareCarefullyTweaks
             if (i > 0 && i < codes.Count - 1
                       && codes[i].opcode == OpCodes.Call
                       && codes[i + 1].opcode == OpCodes.Ret &&
-                      codes[i].operand.ToString().Contains("EdB.PrepareCarefully.CustomPawn Load"))
+                      codes[i].operand.ToString()!.Contains("EdB.PrepareCarefully.CustomPawn Load"))
             {
-                //PawnkindRaceDiversification.Logger.Message("Found the method, injecting my load method into it: " + codes[i].operand.ToString());
                 insertionIndices.Add(i - 1);
             }
         }
@@ -99,7 +97,6 @@ public class PrepareCarefullyTweaks
     //  Saves data related to what race the pawn is
     public static void OnPrepareCarefullySavingPawn(Pawn pawn, string colonistName)
     {
-        //PawnkindRaceDiversification.Logger.Message("Prepare carefully saved a pawn: " + colonistName);
         //Save this pawn's race (a saving extension for Prepare Carefully)
         Scribe_Values.Look(ref pawn.def.defName, "HAR_AlienRace");
     }
@@ -120,13 +117,11 @@ public class PrepareCarefullyTweaks
     //  Please let me know if I shouldn't be doing this.
     public static void PawnPreCopy(Pawn source)
     {
-        //PawnkindRaceDiversification.Logger.Message("PreCopy: " + source.def.defName);
         prevRaceDef = source.def;
     }
 
     public static void PawnPostCopy(ref Pawn __result)
     {
-        //PawnkindRaceDiversification.Logger.Message("PostCopy: " + __result.def.defName);
         __result.def = prevRaceDef;
         prevRaceDef = null;
     }
@@ -136,7 +131,6 @@ public class PrepareCarefullyTweaks
     {
         if (loadedAlienRace != "none")
         {
-            //PawnkindRaceDiversification.Logger.Message("Loaded pawn is initializing with race " + loadedAlienRace);
             pawn.def = (from x in DefDatabase<ThingDef_AlienRace>.AllDefs
                 where x.race != null
                 select x).First(a => a.defName == loadedAlienRace);

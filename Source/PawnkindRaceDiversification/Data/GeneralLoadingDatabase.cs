@@ -3,7 +3,7 @@ using RimWorld;
 
 namespace PawnkindRaceDiversification.Data;
 
-internal sealed class GeneralLoadingDatabase
+internal static class GeneralLoadingDatabase
 {
     internal static readonly List<string> impliedRacesLoaded = [];
     internal static readonly List<string> pawnKindDefsExcluded = [];

@@ -51,18 +51,6 @@ public class ChjeeDroidFixes
             new CodeInstruction(OpCodes.Callvirt,
                 AccessTools.Method(typeof(PawnkindGenerationHijacker), "get_IsPawnOfPlayerFaction")));
 
-        /*
-        string code = "Codes: \n";
-        foreach (CodeInstruction c in codes)
-        {
-            code += c.opcode.ToString();
-            if (c.operand != null)
-                code += c.operand;
-            code += "\n";
-        }
-        PawnkindRaceDiversification.Logger.Message(code);
-        */
-
         return codes.AsEnumerable();
     }
 }

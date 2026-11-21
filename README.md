@@ -1,6 +1,6 @@
 # [Pawnkind Race Diversification (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2828866565)
 
-![Image](https://i.imgur.com/buuPQel.png)
+![Image](https://img.litet.net/logos/Info.png)
 
 Update of Solid E. Wiress mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2460358429
@@ -8,9 +8,9 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=2460358429
 - Will throw some errors if the alien age is not within generation range, should be okay anyway.
 - Will throw errors regarding tatoo/beard/hair-styles if the race does not have these defined, there is nothing this mod can really do about it.
 
-![Image](https://i.imgur.com/pufA0kM.png)
+![Image](https://img.litet.net/logos/Notice.png)
 	
-![Image](https://i.imgur.com/Z4GOv8H.png)
+![Image](https://img.litet.net/logos/OriginalDescription.png)
 
 # Description
 
@@ -79,13 +79,13 @@ Modders can patch the mod extensions that I created to allow their races to appe
 
 This mod is licensed under the MIT license. You are allowed to use this in your modpacks.
 
-![Image](https://i.imgur.com/PwoNOj4.png)
+![Image](https://img.litet.net/logos/ReportingIssues.png)
 
 
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
+-  Always post your log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
@@ -93,4 +93,4 @@ This mod is licensed under the MIT license. You are allowed to use this in your 
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/PawnkindRaceDiversification?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2828866565) | tags: race,  diversity
+[![Image](https://img.shields.io/github/v/release/emipa606/PawnkindRaceDiversification?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2828866565) | diversity, race

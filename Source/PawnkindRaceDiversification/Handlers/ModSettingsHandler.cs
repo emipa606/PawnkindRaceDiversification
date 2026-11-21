@@ -29,7 +29,7 @@ internal class ModSettingsHandler
     internal static readonly List<SettingHandle<float>> allHandleReferences = [];
     internal static List<string> evaluatedRaces = [];
 
-    internal void PrepareSettingHandles(ModSettingsPack pack, List<string> races)
+    internal static void PrepareSettingHandles(ModSettingsPack pack, List<string> races)
     {
         evaluatedRaces = races;
         DebugMode = pack.GetHandle("DebugMode", "PawnkindRaceDiversity_DebugMode_label".Translate(),
@@ -81,7 +81,7 @@ internal class ModSettingsHandler
 
     //Constructs a button in the mod settings that handles custom actions.
     //  Specifically, these are made in order to create special windows.
-    private void SettingsButtonCategoryConstructor(ModSettingsPack pack, string labelID, string buttonLabel,
+    private static void SettingsButtonCategoryConstructor(ModSettingsPack pack, string labelID, string buttonLabel,
         string desc,
         Action buttonAction, Func<bool> invalidCondition = null)
     {
@@ -119,7 +119,7 @@ internal class ModSettingsHandler
     }
 
     //Make race adjustment settings handles. Are never visible, but are adjusted through other means.
-    private void ConstructRaceAdjustmentHandles(ModSettingsPack pack, HandleContext context)
+    private static void ConstructRaceAdjustmentHandles(ModSettingsPack pack, HandleContext context)
     {
         foreach (var race in evaluatedRaces)
         {
@@ -194,7 +194,7 @@ internal class ModSettingsHandler
     }
 
     //Construct other list-related handles
-    private void ConstructOtherAdjustmentHandles(ModSettingsPack pack, string handleName, List<string> elements,
+    private static void ConstructOtherAdjustmentHandles(ModSettingsPack pack, string handleName, List<string> elements,
         ref Dictionary<string, SettingHandle<bool>> handleDict, bool defaultValue, bool unsaved)
     {
         foreach (var defName in elements)
@@ -314,7 +314,7 @@ internal class ModSettingsHandler
         UpdateHandleReferencesInAllReferences(ref handle, context);
     }
 
-    private bool isInWorld()
+    private static bool isInWorld()
     {
         var game = Current.Game;
         var world = game?.World;

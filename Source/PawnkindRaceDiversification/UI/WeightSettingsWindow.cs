@@ -16,7 +16,7 @@ public class WeightSettingsWindow : Window
     private readonly Dictionary<string, float> spawnChancesVisual = new();
     public readonly HandleContext windowContext;
     private readonly string windowDesc = "No description";
-    public readonly List<SettingHandle<float>> windowHandles;
+    private readonly List<SettingHandle<float>> windowHandles;
     private readonly string windowTitle = "Weight Settings Window";
     private Rect btnAccept;
     private Vector2 listButtonSize = new(84f, 24f);
@@ -296,7 +296,7 @@ public class WeightSettingsWindow : Window
         }
     }
 
-    private void HighlightableInfoMouseover(Rect rect, string label)
+    private static void HighlightableInfoMouseover(Rect rect, string label)
     {
         if (!Mouse.IsOver(rect))
         {
@@ -315,7 +315,7 @@ public class WeightSettingsWindow : Window
             return 0.0f;
         }
 
-        var handle = windowHandles.FirstOrFallback(h => h.Name == fullID);
+        var handle = windowHandles.FirstOrFallback(h => h?.Name == fullID);
         if (handle == null)
         {
             return 0.0f;
@@ -362,7 +362,7 @@ public class WeightSettingsWindow : Window
             return;
         }
 
-        var handle = windowHandles.FirstOrFallback(h => h.Name == fullID);
+        var handle = windowHandles.FirstOrFallback(h => h?.Name == fullID);
         if (handle == null)
         {
             return;
@@ -397,8 +397,8 @@ public class WeightSettingsWindow : Window
         foreach (var race in ModSettingsHandler.evaluatedRaces)
         {
             var fullID = ModSettingsHandler.GetRaceSettingWeightID(windowContext, race);
-            var handle = windowHandles.FirstOrFallback(h => h.Name == fullID);
-            if (handle.Value < 0.0f)
+            var handle = windowHandles.FirstOrFallback(h => h?.Name == fullID);
+            if (handle is { Value: < 0.0f })
             {
                 prevAdjustedRaces[race] = true;
             }
@@ -454,7 +454,7 @@ public class WeightSettingsWindow : Window
                 value = GrabWeightReference(handle.Title, windowContext);
             }
 
-            ModSettingsHandler.allHandleReferences.Find(h => h.Name == handle.Name).Value = value;
+            ModSettingsHandler.allHandleReferences.Find(h => h.Name == handle.Name)?.Value = value;
         }
 
         base.PreClose();

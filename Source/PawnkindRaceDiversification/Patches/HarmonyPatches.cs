@@ -111,8 +111,8 @@ internal static class HarmonyPatches
         var classes = new List<Type>();
         //Look through each inherited class in this type's assembly
         foreach (var type in
-                 typeAssembly.GetTypes()
-                     .Where(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(masterType)))
+                 typeAssembly?.GetTypes()
+                     .Where(type => type is { IsClass: true, IsAbstract: false } && type.IsSubclassOf(masterType))!)
         {
             classes.Add(type);
         }
@@ -122,7 +122,7 @@ internal static class HarmonyPatches
         {
             foreach (var type in
                      otherAssembly.GetTypes()
-                         .Where(type => type.IsClass && !type.IsAbstract && type.IsSubclassOf(masterType)))
+                         .Where(type => type is { IsClass: true, IsAbstract: false } && type.IsSubclassOf(masterType)))
             {
                 classes.Add(type);
             }

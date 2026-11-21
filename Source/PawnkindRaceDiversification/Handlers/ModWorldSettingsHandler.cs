@@ -51,7 +51,7 @@ internal class ModWorldSettingsHandler : WorldComponent
     }
 
     //Races added in ongoing saves are set with a weight of 0.0.
-    private void ResolveMissingWeights()
+    private static void ResolveMissingWeights()
     {
         ModSettingsHandler.ResolveMissingRaces(ref ModSettingsHandler.setLocalFlatWeights, 0.0f);
     }

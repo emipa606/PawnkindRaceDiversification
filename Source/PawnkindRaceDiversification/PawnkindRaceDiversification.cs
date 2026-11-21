@@ -257,7 +257,7 @@ public class PawnkindRaceDiversification : ModBase
         }
 
         SettingsHandler = new ModSettingsHandler();
-        SettingsHandler.PrepareSettingHandles(Instance.Settings, raceNames);
+        ModSettingsHandler.PrepareSettingHandles(Instance.Settings, raceNames);
     }
 
     internal enum SeekedMod
